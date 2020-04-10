@@ -2,6 +2,7 @@
 
 from typing import Optional
 from datetime import date
+from inspect import signature
 
 from .base import Validator
 
@@ -16,6 +17,18 @@ class OptionalValue(Validator):
     def validate(self, key, value):
         pass
 
+class OptionalFunction(Validator):
+    """A function"""
+    def __init__(self) -> None:
+        pass
+
+    def validate(self, key, value):
+        if value is None:
+            return None
+
+        if not callable(value):
+            raise ValueError(f'{key} must be a function, got type {type(value)}')
+        # TODO: Validate signature
 
 class Bounded(Validator):
     """A bounded number."""

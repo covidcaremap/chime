@@ -9,6 +9,7 @@ from .validators import (
     Date as ValDate,
     OptionalDate as ValOptionalDate,
     ValDisposition as ValValDisposition,
+    OptionalFunction as ValOptionalFunction
 )
 
 OptionalValue = ValOptionalValue()
@@ -20,5 +21,6 @@ Rate = ValRate()
 Date = ValDate()
 OptionalDate = ValOptionalDate()
 ValDisposition = ValValDisposition()
+OptionalFunction = ValOptionalFunction()
 # # rolling a custom validator for doubling time in case DS wants to add upper bound
 # DoublingTime = OptionalBounded(lower_bound=0-EPSILON, upper_bound=None)
