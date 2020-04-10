@@ -27,8 +27,8 @@ from .validators import (
     Rate,
     StrictlyPositive,
     ValDisposition,
+    OptionalFunction
 )
-
 
 basicConfig(
     level=INFO,
@@ -136,9 +136,9 @@ VALIDATORS = {
     "ventilated": ValDisposition,
     "hospitalized": ValDisposition,
     "icu": ValDisposition,
-    "known_infected": ValDisposition,
-    "tested": ValDisposition,
-    "calculate_infected": OptionalValue
+    "known_infected": OptionalStrictlyPositive,
+    "tested": OptionalStrictlyPositive,
+    "calculate_infected": OptionalFunction
 }
 
 
@@ -314,6 +314,13 @@ ARGS = (
         "tested",
         int,
         0,
+        None,
+        True
+    ),
+    (
+        "calculate_infected",
+        callable,
+        None,
         None,
         True
     )

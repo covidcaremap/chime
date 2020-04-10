@@ -34,7 +34,7 @@ class SimSirModel:
         This method by default will use the number of current hospitalized
         patients, hospital market share, and the hospitalization rate to
         derive the number of populations effected. Child class models
-        can oveerride this method in order to calculate this in a different way.
+        can override this method in order to calculate this in a different way.
         """
         # Note: this should not be an integer.
         # We're appoximating infected from what we do know
@@ -288,7 +288,7 @@ class RegionalSirModel(SimSirModel):
         # if the function is defined, use that
         # use the default implementation
         if p.calculate_infected:
-            return p.calculate_infected(p, **kwargs)
+            return p.calculate_infected(p)
 
         if not hasattr(p, 'detection_probability') or p.detection_probability is None:
             p.detection_probability = 0.14
