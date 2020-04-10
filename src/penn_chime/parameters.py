@@ -136,6 +136,9 @@ VALIDATORS = {
     "ventilated": ValDisposition,
     "hospitalized": ValDisposition,
     "icu": ValDisposition,
+    "known_infected": ValDisposition,
+    "tested": ValDisposition,
+    "calculate_infected": OptionalValue
 }
 
 
@@ -160,6 +163,9 @@ HELP = {
     "relative_contact_rate": "Social distancing reduction rate: 0.0 - 1.0",
     "ventilated_days": "Average days on ventilator",
     "ventilated_rate": "Ventilated Rate: 0.0 - 1.0",
+    "known_infected": "The number of confirmed infections",
+    "tested": "The number of people who have been tested",
+    "calculate_infected": "Function to estimate infected population"
 }
 
 
@@ -297,6 +303,20 @@ ARGS = (
         1.0,
         True,
     ),
+    (
+        "known_infected",
+        int,
+        0,
+        None,
+        True
+    ),
+    (
+        "tested",
+        int,
+        0,
+        None,
+        True
+    )
 )
 
 
@@ -395,6 +415,10 @@ class Parameters:
         self.relative_contact_rate = None
         self.recovered = None
         self.ventilated = None
+        self.known_infected = None
+        self.tested = None
+        # this gets passed the parameter object
+        self.calculate_infected = None
 
         passed_and_default_parameters = {}
         for key, value in kwargs.items():

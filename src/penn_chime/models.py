@@ -32,12 +32,13 @@ class SimSirModel:
         """Calculated the estimated infected population.
 
         This method by default will use the number of current hospitalized
-        patients, hospital market share, and the hospitalizatio rate to
+        patients, hospital market share, and the hospitalization rate to
         derive the number of populations effected. Child class models
         can oveerride this method in order to calculate this in a different way.
         """
         # Note: this should not be an integer.
-        # We're appoximating infected from what we do know.
+        # We're appoximating infected from what we do know
+
         # TODO market_share > 0, hosp_rate > 0
         return (
             1.0 / p.market_share / p.hospitalized.rate
@@ -283,6 +284,12 @@ class RegionalSirModel(SimSirModel):
 
     def calculate_infected(self, p: Parameters) -> float:
         # TODO: A better way for subclassed models to have their own Parameter values.
+        
+        # if the function is defined, use that
+        # use the default implementation
+        if p.calculate_infected:
+            return p.calculate_infected(p, **kwargs)
+
         if not hasattr(p, 'detection_probability') or p.detection_probability is None:
             p.detection_probability = 0.14
 
